@@ -1,0 +1,171 @@
+@use "../abstracts/" as *;
+
+.Navbar {
+  width: 100vw;
+  padding: 0 2%;
+  height: rem(90);
+  position: fixed;
+  top: 0;
+  @include flex(space-between);
+  z-index: 9;
+  background: $TextColor;
+  font-weight: bold;
+  color: $BgColor;
+  font-family: $AccentFont;
+
+  @include media-query("sm") {
+    width: 100%;
+    height: rem(60);
+  }
+
+  .Logo {
+    width: 30%;
+    height: 100%;
+    @include flex(flex-start, center);
+  }
+
+  .logoImage {
+    width: 80px;
+    height: auto;
+    cursor: pointer;
+  }
+
+  .NavBody {
+    height: 100%;
+    flex: 1 1 auto;
+    @include flex(space-between, flex-end, rem(2));
+
+    .NavWrapper {
+      @include flex(space-between, flex-end, rem(2));
+      height: 100%;
+
+      .NavLink {
+        height: 100%;
+        letter-spacing: rem(3);
+        vertical-align: middle;
+        width: rem(160);
+        padding-bottom: 8px;
+        @include flex(center, center);
+        font-size: rem(22);
+        border-radius: rem(5) rem(5) 0 0;
+
+        @include media-query("sm") {
+          // display: none;
+          padding: rem(8) rem(16);
+          font-size: rem(16);
+        }
+      }
+    }
+
+    .BtnWrapper {
+      height: 100%;
+      margin-left: rem(60);
+      @include flex(center, center);
+      background: transparent;
+      @media (min-width: 1200px) and (max-width: 1400px) {
+        button {
+          white-space: nowrap;
+        }
+      }
+    }
+
+    @include media-query("sm") {
+      z-index: 99;
+      width: 100%;
+      background: $TextColor;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: fixed;
+      bottom: 0;
+      left: -100%;
+      height: 100vh;
+      overflow: hidden;
+      gap: rem(20);
+
+      &.active {
+        transform: translateX(100%);
+      }
+
+      .NavWrapper {
+        height: fit-content;
+        flex-direction: column;
+        justify-content: flex-start;
+        gap: rem(10);
+
+        .NavLink {
+          justify-content: flex-end;
+          height: 30px;
+        }
+      }
+
+      .BtnWrapper {
+        height: fit-content;
+        margin: 0;
+        @include flex(center, center);
+        background: transparent;
+      }
+     
+    }
+
+    @include media-query('md') {
+      .NavWrapper {
+        gap: rem(10);
+        .NavLink {
+          width: auto;
+          padding: rem(10) rem(20);
+          font-size: rem(18);
+        }
+      }
+    }
+  }
+
+  .Hamburger {
+    display: none;
+    z-index: 999;
+
+    @include media-query("sm") {
+      display: block;
+      margin-right: rem(10);
+      border-radius: 50%;
+      padding: rem(10);
+      @include flex(center, center);
+      font-size: rem(28);
+      color: $BgColor;
+      cursor: pointer;
+
+      &:active {
+        background: darken($AccentColor, 10%);
+      }
+    }
+  }
+
+
+
+  // Hamburger Functionality
+  @include media-query("sm") {
+    .Hamburger {
+      display: block;
+    }
+
+    .BtnWrapper {
+      display: none;
+    }
+
+    .NavWrapper {
+      display: none;
+    }
+
+    &.active {
+      .NavWrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .BtnWrapper {
+        display: flex;
+      }
+    }
+  }
+}
